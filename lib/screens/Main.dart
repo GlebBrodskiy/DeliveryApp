@@ -106,7 +106,7 @@ class _MainState extends State<Main> {
     'Chicken rolls'
   ];
   List<String> foodMenuSubtitle = ['Crab', 'Pasta, tomatoes', 'Chicken'];
-  List<double> foodMenuPrice = [28.11, 42.10, 13.99];
+  List<double> foodMenuPrice = [28.11, 42.16, 13.99];
 
   @override
   Widget build(BuildContext context) {
@@ -373,87 +373,10 @@ Favorite Food''',
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 25,
-                    ),
-                    child: Container(
-                      height: 350,
-                      width: 400,
-                      child: ListView.builder(
-                          itemCount: foodMenu.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: SizedBox(
-                                height: 100,
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width,
-                                child: Expanded(
-                                  child: Card(
-                                    color: Colors.white.withOpacity(0.150),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(right: 20),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Container(
-                                              child:
-                                              Image.asset(foodMenu[index]),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 20, top: 18),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  '${foodMenuTitle[index]}',
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.only(
-                                                      top: 4),
-                                                  child: Text(
-                                                    '${foodMenuSubtitle[index]}',
-                                                    style: TextStyle(
-                                                        color: Colors.grey),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: Alignment.centerRight,
-                                              child: Text(
-                                                '\$ ${foodMenuPrice[index]}',
-                                                style: TextStyle(
-                                                    color: Color.fromRGBO(
-                                                        83, 232, 139, 1)),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
-                    ),
-                  )
+                  _buildPopularMenu(0),
+                  _buildPopularMenu(1),
+                  _buildPopularMenu(2),
+
                 ],
               )
             ],
@@ -462,6 +385,76 @@ Favorite Food''',
       ]);
 
   }
+Widget _buildPopularMenu(int index){
+    return  Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: SizedBox(
+            height: 100,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
+            child: Expanded(
+              child: Card(
+                color: Colors.white.withOpacity(0.150),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(20))),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          child:
+                          Image.asset(foodMenu[index]),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20, top: 18),
+                        child: Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${foodMenuTitle[index]}',
+                              style: TextStyle(
+                                  color: Colors.white),
+                            ),
+                            Padding(
+                              padding:
+                              const EdgeInsets.only(
+                                  top: 4),
+                              child: Text(
+                                '${foodMenuSubtitle[index]}',
+                                style: TextStyle(
+                                    color: Colors.grey),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            '\$ ${foodMenuPrice[index]}',
+                            style: TextStyle(
+                                color: Color.fromRGBO(
+                                    83, 232, 139, 1)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
 
+}
 }
 

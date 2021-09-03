@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'Main.dart';
 
 class Cart extends StatefulWidget {
   const Cart({Key? key}) : super(key: key);
@@ -184,7 +183,8 @@ class _CartState extends State<Cart> {
                                                   backgroundColor:
                                                       MaterialStateProperty.all<
                                                               Color>(
-                                                          Colors.greenAccent),
+                                                          Color.fromRGBO(
+                                                              83, 232, 139, 1)),
                                                   shape: MaterialStateProperty
                                                       .all<RoundedRectangleBorder>(
                                                           RoundedRectangleBorder(
@@ -218,7 +218,8 @@ class _CartState extends State<Cart> {
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Colors.greenAccent.withOpacity(0.850)),
+                  color: Color.fromRGBO(
+                  83, 232, 139, 1)),
               height: 200,
               width: MediaQuery.of(context).size.width,
               child: Padding(
@@ -284,8 +285,10 @@ class _CartState extends State<Cart> {
                           height: 50,
                           child: ElevatedButton(
                               onPressed: () {
-
-                              }, child: Text('Place My Order', style: TextStyle(color: Colors.greenAccent, fontWeight: FontWeight.bold),),
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar( content: Text('Your order was placed', style: TextStyle(color: Color.fromRGBO(
+                                    83, 232, 139, 1)),), ));
+                              }, child: Text('Place My Order', style: TextStyle(color: Color.fromRGBO(
+    83, 232, 139, 1), fontWeight: FontWeight.bold),),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,
                             shape: RoundedRectangleBorder(
