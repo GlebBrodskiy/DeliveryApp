@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'Cart.dart';
 import 'Chat.dart';
 
+
 class Navigating extends StatefulWidget {
   const Navigating({Key? key}) : super(key: key);
 
@@ -72,6 +73,31 @@ class _NavigatingState extends State<Navigating> {
   }
 }
 
+List<String> nearestRestaurants = [
+  'Vegan Resto',
+  'Health Food',
+  'Good Food',
+  'Smart Resto'
+];
+List<int> howLongToGo = [12, 20, 8, 4];
+List<String> restoImages = [
+  'lib/screens/assets/1.png',
+  'lib/screens/assets/RestaurantImage2.png',
+  'lib/screens/assets/RestaurantImage3.png',
+  'lib/screens/assets/4.png'
+];
+List<String> foodMenu = [
+  'lib/screens/assets/food1.png',
+  'lib/screens/assets/food2.png',
+  'lib/screens/assets/food3.png',
+];
+List<String> foodMenuTitle = [
+  'Spacy crab soup',
+  'Pomadoro Pasta',
+  'Chicken rolls'
+];
+List<String> foodMenuSubtitle = ['Crab', 'Pasta, tomatoes', 'Chicken'];
+List<double> foodMenuPrice = [28.11, 42.16, 13.99];
 
 class Main extends StatefulWidget {
   Main({Key? key}) : super(key: key);
@@ -82,31 +108,7 @@ class Main extends StatefulWidget {
 
 class _MainState extends State<Main> {
 
-  List<String> nearestRestaurants = [
-    'Vegan Resto',
-    'Health Food',
-    'Good Food',
-    'Smart Resto'
-  ];
-  List<int> howLongToGo = [12, 20, 8, 4];
-  List<String> restoImages = [
-    'lib/screens/assets/1.png',
-    'lib/screens/assets/RestaurantImage2.png',
-    'lib/screens/assets/RestaurantImage3.png',
-    'lib/screens/assets/4.png'
-  ];
-  List<String> foodMenu = [
-    'lib/screens/assets/food1.png',
-    'lib/screens/assets/food2.png',
-    'lib/screens/assets/food3.png',
-  ];
-  List<String> foodMenuTitle = [
-    'Spacy crab soup',
-    'Pomadoro Pasta',
-    'Chicken rolls'
-  ];
-  List<String> foodMenuSubtitle = ['Crab', 'Pasta, tomatoes', 'Chicken'];
-  List<double> foodMenuPrice = [28.11, 42.16, 13.99];
+
 
   @override
   Widget build(BuildContext context) {
@@ -394,61 +396,59 @@ Widget _buildPopularMenu(int index){
                 .of(context)
                 .size
                 .width,
-            child: Expanded(
-              child: Card(
-                color: Colors.white.withOpacity(0.150),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(20))),
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          child:
-                          Image.asset(foodMenu[index]),
-                        ),
+            child: Card(
+              color: Colors.white.withOpacity(0.150),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(20))),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        child:
+                        Image.asset(foodMenu[index]),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, top: 18),
-                        child: Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${foodMenuTitle[index]}',
-                              style: TextStyle(
-                                  color: Colors.white),
-                            ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.only(
-                                  top: 4),
-                              child: Text(
-                                '${foodMenuSubtitle[index]}',
-                                style: TextStyle(
-                                    color: Colors.grey),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            '\$ ${foodMenuPrice[index]}',
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20, top: 18),
+                      child: Column(
+                        crossAxisAlignment:
+                        CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${foodMenuTitle[index]}',
                             style: TextStyle(
-                                color: Color.fromRGBO(
-                                    83, 232, 139, 1)),
+                                color: Colors.white),
                           ),
+                          Padding(
+                            padding:
+                            const EdgeInsets.only(
+                                top: 4),
+                            child: Text(
+                              '${foodMenuSubtitle[index]}',
+                              style: TextStyle(
+                                  color: Colors.grey),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          '\$ ${foodMenuPrice[index]}',
+                          style: TextStyle(
+                              color: Color.fromRGBO(
+                                  83, 232, 139, 1)),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

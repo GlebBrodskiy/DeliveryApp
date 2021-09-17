@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 class Chat extends StatelessWidget {
+  final int testing = 2;
   const Chat({Key? key}) : super(key: key);
 
   @override
@@ -32,7 +33,7 @@ class Chat extends StatelessWidget {
                 _buildChat('Valya Grusheva', 'DataBase was reloaded!',context),
                 _buildChat('Artem Lebedev', 'New design is ready',context),
                 _buildChat('Антонина Собачкина', 'Забери зарплату',context),
-                _buildChat('Лариса Крысина', 'У тебя завтра митинг?',context),
+                _buildChat('Лариса Крысина', 'У тебя завтра митинг? ',context),
 
               ],
             ),

@@ -24,13 +24,13 @@ class _ProfileState extends State<Profile> {
 
   String? profileName;
 
-  void _rename(value) {
-    setState(() {
-      profileName = value;
-      print(profileName);
-      print(value);
-    });
-  }
+  // void _rename(value) {
+  //   setState(() {
+  //     profileName = value;
+  //     print(profileName);
+  //     print(value);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +38,10 @@ class _ProfileState extends State<Profile> {
       backgroundColor: Colors.white.withOpacity(0.150),
       body: Column(
         children: [
-          Stack(children: [
-            _buildProfileImage(),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.88,
-              child: SlidingSheet(
+          Expanded(
+            child: Stack(children: [
+              _buildProfileImage(),
+              SlidingSheet(
                 color: Colors.black,
                 backdropColor: Colors.transparent,
                 elevation: 8,
@@ -51,7 +49,7 @@ class _ProfileState extends State<Profile> {
                 snapSpec: const SnapSpec(
                   snap: true,
                   snappings: [0.6, 0.9],
-                  positioning: SnapPositioning.relativeToAvailableSpace,
+                  // positioning: SnapPositioning.relativeToAvailableSpace,
                 ),
                 builder: (context, state) {
                   return Container(
@@ -94,18 +92,16 @@ class _ProfileState extends State<Profile> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 14),
-                            child: Expanded(
-
-                                child: _buildFavotiteFood()),
+                            child: _buildFavoriteFood(),
                           )
                         ],
                       ),
                     ),
                   );
                 },
-              ),
-            )
-          ]),
+              )
+            ]),
+          ),
         ],
       ),
     );
@@ -268,7 +264,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _buildFavotiteFood() {
+  Widget _buildFavoriteFood() {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: foodMenu.length,
