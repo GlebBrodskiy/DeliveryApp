@@ -1,4 +1,6 @@
+import 'package:delivery/screens/Main.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
 class Profile extends StatefulWidget {
@@ -85,7 +87,7 @@ class _ProfileState extends State<Profile> {
                             child: Text(
                               'Favorite',
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Provider.of<Color>(context),
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -143,10 +145,17 @@ class _ProfileState extends State<Profile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            profileName ?? 'Anam Wusono',
-            style: TextStyle(
-                color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+          Constant(
+neededColor: Colors.yellow,
+            child: Builder(
+              builder: (context) {
+                return Text(
+                  profileName ?? 'Anam Wusono',
+                  style: TextStyle(
+                      color: Constant.of(context)?.neededColor, fontSize: 30, fontWeight: FontWeight.bold),
+                );
+              }
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 4),

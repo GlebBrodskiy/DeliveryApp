@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'screens/Main.dart';
 
 void main() {
@@ -10,13 +11,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: [
+        Provider<Color>.value(value: Colors.yellow)
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
 
-      home: Navigating(),
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity
+        home: Navigating(),
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          visualDensity: VisualDensity.adaptivePlatformDensity
+        ),
       ),
     );
   }
