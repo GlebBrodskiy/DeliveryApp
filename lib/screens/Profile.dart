@@ -25,6 +25,7 @@ class _ProfileState extends State<Profile> {
   final List<double> foodMenuPrice = [28.11, 42.13, 13.99];
 
   String? profileName;
+  final ValueNotifier<int> _counter = ValueNotifier<int>(0);
 
   // void _rename(value) {
   //   setState(() {
@@ -264,11 +265,24 @@ neededColor: Colors.yellow,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 20),
-          child: Text(
-            'You Have 3 Voucher',
-            style: TextStyle(color: Colors.white, fontSize: 18),
+          child: ValueListenableBuilder(
+            builder: (BuildContext context, int value, Widget? child){
+             return Text(
+                'You Have ${_counter.value} Voucher',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              );
+            },
+            valueListenable: _counter,
+
+
           ),
-        )
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 50.0),
+          child: TextButton(onPressed: (){
+            _counter.value++;
+          }, child: Text('Press me', style: TextStyle(color: Colors.white),),),
+        ),
       ],
     );
   }
