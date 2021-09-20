@@ -1,9 +1,19 @@
+import 'dart:convert';
 
+import 'package:delivery/jsons/cats.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class Chat extends StatelessWidget {
+class Chat extends StatefulWidget {
+  @override
+  State<Chat> createState() => _ChatState();
+}
+
+class _ChatState extends State<Chat> {
   final int testing = 2;
-  const Chat({Key? key}) : super(key: key);
+  Kitty? catFact;
+  Future<http.Response> uriParse =
+      http.get(Uri.parse('https://catfact.ninja/fact'));
 
   @override
   Widget build(BuildContext context) {
@@ -19,22 +29,47 @@ class Chat extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 70, left: 25),
                   child: Text(
-                    'Chats',
+                    'Cat Facts',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 31,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                _buildChat('Andrew Pivovarov', 'Let\'s go for lunch!', context),
-                _buildChat('Darya IOS', 'I have made my task!',context),
-                _buildChat('Кирилл Кошечкин', 'С днем рождения!!!',context),
-                _buildChat('David Maiko', 'Here are some new featu...',context),
-                _buildChat('Valya Grusheva', 'DataBase was reloaded!',context),
-                _buildChat('Artem Lebedev', 'New design is ready',context),
-                _buildChat('Антонина Собачкина', 'Забери зарплату',context),
-                _buildChat('Лариса Крысина', 'У тебя завтра митинг? ',context),
+                FutureBuilder(
+                  future: uriParse,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<http.Response> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+                      var parsedJson = json.decode(snapshot.data!.body);
 
+                      catFact = Kitty.fromJson(parsedJson);
+
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 50),
+                        child: Text(
+                          catFact!.fact.toString(),
+                          style: TextStyle(color: Colors.white, fontSize: 23),
+                        ),
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return SizedBox(
+                        child: Center(child: CircularProgressIndicator()),
+                        width: 100,
+                        height: 100,
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: Text(
+                          'Error: ${snapshot.error}',
+                          style: TextStyle(color: Colors.yellow),
+                        ),
+                      );
+                    }
+                  },
+                )
               ],
             ),
           )
@@ -43,7 +78,7 @@ class Chat extends StatelessWidget {
     );
   }
 
-  Widget _buildChat(String name, String message, BuildContext context){
+  Widget _buildChat(String name, String message, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       child: Container(
@@ -51,26 +86,46 @@ class Chat extends StatelessWidget {
         height: 110,
         decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.15),
-            borderRadius: BorderRadius.all(Radius.circular(20))
-        ),
+            borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-          child: Row(children: [
-            Icon(Icons.message_rounded, color: Colors.greenAccent, size: 36,),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(name, style: TextStyle(color: Colors.grey, fontSize: 18),),
-                  Text(message, style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 20),)
-                ],),
-            )
-
-          ],
+          child: Row(
+            children: [
+              Icon(
+                Icons.message_rounded,
+                color: Colors.greenAccent,
+                size: 36,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, top: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: TextStyle(color: Colors.grey, fontSize: 18),
+                    ),
+                    Text(
+                      message,
+                      style: TextStyle(
+                          color: Colors.white.withOpacity(0.8), fontSize: 20),
+                    )
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),
     );
+  }
+
+  getDataFromAPI() async {
+    const String API_URL = "https://catfact.ninja/fact";
+    var response = await http.get(Uri.parse(API_URL));
+    var parsedJson = await json.decode(response.body);
+    setState(() {
+      catFact = Kitty.fromJson(parsedJson);
+    });
   }
 }
