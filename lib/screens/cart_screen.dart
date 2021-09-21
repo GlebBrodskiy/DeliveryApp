@@ -70,80 +70,13 @@ class _CartState extends State<Cart> {
                       padding: const EdgeInsets.only(right: 20),
                       child: Row(
                         children: [
-                          Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Container(
-                                child: Image.asset(foodMenu[index]),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, top: 18),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${foodMenuTitle[index]}',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 4),
-                                  child: Text(
-                                    '${foodMenuSubtitle[index]}',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(
-                                      '\$ ${foodMenuPrice[index]}',
-                                      style: TextStyle(
-                                          fontSize: 19,
-                                          color:
-                                              Color.fromRGBO(83, 232, 139, 1)),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          _buildOrderImage(index),
+                          _buildOrderDetails(index),
                           Expanded(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(
-                                  height: 28,
-                                  width: 28,
-                                  child: TextButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        foodMenuOrderCounter[index] =
-                                            foodMenuOrderCounter[index] - 1;
-
-                                        totalSum -= foodMenuPrice[index];
-                                      });
-                                    },
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                Colors.green
-                                                    .withOpacity(0.150)),
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18.0),
-                                        ))),
-                                    child: Text(
-                                      '-',
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(83, 232, 139, 1)),
-                                    ),
-                                  ),
-                                ),
+                                _buildMinusButton(index),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 17),
                                   child: Text(
@@ -151,40 +84,7 @@ class _CartState extends State<Cart> {
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 17),
-                                  child: Container(
-                                    height: 28,
-                                    width: 28,
-                                    child: TextButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          // foodMenuTotalForOne[index] = 0;
-                                          // foodMenuTotalForOne[index] += foodMenuPrice[index];
-
-                                          foodMenuOrderCounter[index] =
-                                              foodMenuOrderCounter[index] + 1;
-                                          totalSum += foodMenuPrice[index];
-                                        });
-                                      },
-                                      style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Color.fromRGBO(
-                                                      83, 232, 139, 1)),
-                                          shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                          ))),
-                                      child: Text(
-                                        '+',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                )
+                                _buildPlusButton(index)
                               ],
                             ),
                           ),
@@ -195,6 +95,108 @@ class _CartState extends State<Cart> {
                 ),
               );
             }),
+      ),
+    );
+  }
+
+  Widget _buildPlusButton(int index) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 17),
+      child: Container(
+        height: 28,
+        width: 28,
+        child: TextButton(
+          onPressed: () {
+            setState(() {
+              // foodMenuTotalForOne[index] = 0;
+              // foodMenuTotalForOne[index] += foodMenuPrice[index];
+
+              foodMenuOrderCounter[index] = foodMenuOrderCounter[index] + 1;
+              totalSum += foodMenuPrice[index];
+            });
+          },
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(
+                  Color.fromRGBO(83, 232, 139, 1)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+              ))),
+          child: Text(
+            '+',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMinusButton(int index) {
+    return Container(
+      height: 28,
+      width: 28,
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            foodMenuOrderCounter[index] = foodMenuOrderCounter[index] - 1;
+
+            totalSum -= foodMenuPrice[index];
+          });
+        },
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+                Colors.green.withOpacity(0.150)),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ))),
+        child: Text(
+          '-',
+          style: TextStyle(color: Color.fromRGBO(83, 232, 139, 1)),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOrderImage(int index) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          child: Image.asset(foodMenu[index]),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOrderDetails(int index) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, top: 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${foodMenuTitle[index]}',
+            style: TextStyle(color: Colors.white),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              '${foodMenuSubtitle[index]}',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '\$ ${foodMenuPrice[index]}',
+                style: TextStyle(
+                    fontSize: 19, color: Color.fromRGBO(83, 232, 139, 1)),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

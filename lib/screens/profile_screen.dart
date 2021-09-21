@@ -1,7 +1,7 @@
+import 'package:delivery/widgets/constant_inherited_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
-import 'package:delivery/widgets/constant_inherited_widget.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -53,57 +53,61 @@ class _ProfileState extends State<Profile> {
                   // positioning: SnapPositioning.relativeToAvailableSpace,
                 ),
                 builder: (context, state) {
-                  return Container(
-                    height: MediaQuery.of(context).size.height,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      color: Colors.black,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildMemberGold(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              _buildProfileName(),
-                              _buildProfileEditing()
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 30),
-                            child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    color: Colors.white.withOpacity(0.150)),
-                                child: _buildVoucher()),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 34),
-                            child: Text(
-                              'Favorite',
-                              style: TextStyle(
-                                  color: Provider.of<Color>(context),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 14),
-                            child: _buildFavoriteFood(),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
+                  return _buildProfileInfo();
                 },
               )
             ]),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildProfileInfo(){
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        color: Colors.black,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildMemberGold(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildProfileName(),
+                _buildProfileEditing()
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 15, vertical: 30),
+              child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 80,
+                  decoration: BoxDecoration(
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(20)),
+                      color: Colors.white.withOpacity(0.150)),
+                  child: _buildVoucher()),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 34),
+              child: Text(
+                'Favorite',
+                style: TextStyle(
+                    color: Provider.of<Color>(context),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: _buildFavoriteFood(),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -184,56 +188,7 @@ class _ProfileState extends State<Profile> {
                       final TextEditingController nameEditTextController =
                           TextEditingController(text: profileName);
 
-                      return AlertDialog(
-                        backgroundColor: Colors.black,
-                        title: Text(
-                          'Edit Profile',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        content: SingleChildScrollView(
-                          child: ListBody(
-                            children: [
-                              Text('Profile name'),
-                              TextField(
-                                style: TextStyle(color: Colors.white),
-                                controller: nameEditTextController,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 2,
-                                            color: Colors.greenAccent),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.greenAccent, width: 2),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
-                                    ),
-                                    hintText: 'Enter your name',
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    filled: true,
-                                    fillColor: Colors.white.withOpacity(0.150)),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      print(nameEditTextController.text);
-                                      Navigator.of(context)
-                                          .pop(nameEditTextController.text);
-                                    },
-                                  );
-                                },
-                                icon: Icon(
-                                  Icons.touch_app_rounded,
-                                  color: Colors.greenAccent,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+                      return _buildAlertDialog(nameEditTextController);
                     });
                 // .then((value){setState(() {
                 //   _rename(value);
@@ -251,6 +206,59 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildAlertDialog(TextEditingController nameEditTextController){
+    return AlertDialog(
+      backgroundColor: Colors.black,
+      title: Text(
+        'Edit Profile',
+        style: TextStyle(color: Colors.white, fontSize: 20),
+      ),
+      content: SingleChildScrollView(
+        child: ListBody(
+          children: [
+            Text('Profile name'),
+            TextField(
+              style: TextStyle(color: Colors.white),
+              controller: nameEditTextController,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2,
+                          color: Colors.greenAccent),
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(20))),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.greenAccent, width: 2),
+                    borderRadius:
+                    BorderRadius.all(Radius.circular(20)),
+                  ),
+                  hintText: 'Enter your name',
+                  hintStyle: TextStyle(color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.150)),
+            ),
+            IconButton(
+              onPressed: () {
+                setState(
+                      () {
+                    print(nameEditTextController.text);
+                    Navigator.of(context)
+                        .pop(nameEditTextController.text);
+                  },
+                );
+              },
+              icon: Icon(
+                Icons.touch_app_rounded,
+                color: Colors.greenAccent,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -308,69 +316,77 @@ class _ProfileState extends State<Profile> {
                   padding: const EdgeInsets.only(left: 20),
                   child: Image.asset(foodMenu[index]),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 18, top: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        foodMenuTitle[index],
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4, bottom: 8),
-                        child: Text(
-                          foodMenuSubtitle[index],
-                          style:
-                              TextStyle(color: Colors.grey[700], fontSize: 16),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.attach_money,
-                            color: Colors.greenAccent,
-                          ),
-                          Text(
-                            '${foodMenuPrice[index]}',
-                            style: TextStyle(
-                                color: Colors.greenAccent, fontSize: 20),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 17),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.greenAccent.shade400),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))))),
-                          onPressed: () {},
-                          child: Text(
-                            'Buy Again',
-                            style: TextStyle(color: Colors.white),
-                          )),
-                    ),
-                  ),
-                )
+                _buildFaivoriteMenuDetails(index),
+                _buildBuyAgainButton()
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildFaivoriteMenuDetails(int index){
+    return Padding(
+      padding: const EdgeInsets.only(left: 18, top: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            foodMenuTitle[index],
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 17,
+                fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 4, bottom: 8),
+            child: Text(
+              foodMenuSubtitle[index],
+              style:
+              TextStyle(color: Colors.grey[700], fontSize: 16),
+            ),
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.attach_money,
+                color: Colors.greenAccent,
+              ),
+              Text(
+                '${foodMenuPrice[index]}',
+                style: TextStyle(
+                    color: Colors.greenAccent, fontSize: 20),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBuyAgainButton(){
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.only(right: 17),
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.greenAccent.shade400),
+                  shape: MaterialStateProperty.all<
+                      RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(20))))),
+              onPressed: () {},
+              child: Text(
+                'Buy Again',
+                style: TextStyle(color: Colors.white),
+              )),
+        ),
+      ),
     );
   }
 }
