@@ -14,7 +14,7 @@ class _ProfileState extends State<Profile> {
   final List<String> foodMenu = [
     'assets/images/food_1.png',
     'assets/images/food_2.png',
-    'assets/images/food3.png',
+    'assets/images/food_3.png',
   ];
   final List<String> foodMenuTitle = [
     'Spacy crab soup',
@@ -30,8 +30,6 @@ class _ProfileState extends State<Profile> {
   // void _rename(value) {
   //   setState(() {
   //     profileName = value;
-  //     print(profileName);
-  //     print(value);
   //   });
   // }
 
@@ -115,7 +113,7 @@ class _ProfileState extends State<Profile> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.4,
       child: Image.asset(
-        'lib/screens/assets/profile.png',
+        'assets/images/profile.png',
         fit: BoxFit.fill,
       ),
     );
@@ -246,7 +244,7 @@ class _ProfileState extends State<Profile> {
                 height: 48,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 5),
-                  child: Image.asset('lib/screens/assets/pencil.png'),
+                  child: Image.asset('assets/images/pencil.png'),
                 ),
               ),
             ),

@@ -11,7 +11,7 @@ class _CartState extends State<Cart> {
   List<String> foodMenu = [
     'assets/images/food_1.png',
     'assets/images/food_2.png',
-    'assets/images/food3.png',
+    'assets/images/food_3.png',
   ];
   List<String> foodMenuTitle = [
     'Spacy crab soup',

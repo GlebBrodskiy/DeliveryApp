@@ -87,7 +87,7 @@ List<String> restoImages = [
 List<String> foodMenu = [
   'assets/images/food_1.png',
   'assets/images/food_2.png',
-  'assets/images/food3.png',
+  'assets/images/food_3.png',
 ];
 List<String> foodMenuTitle = [
   'Spacy crab soup',
@@ -301,7 +301,7 @@ Favorite Food''',
         child: Stack(
           children: [
             Image.asset(
-              'lib/screens/assets/image.jpg',
+              'assets/images/image.jpg',
               fit: BoxFit.cover,
               width: 400,
               height: 150,

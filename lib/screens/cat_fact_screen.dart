@@ -67,46 +67,4 @@ class Chat extends StatelessWidget {
       },
     );
   }
-
-// Widget _buildChat(String name, String message, BuildContext context) {
-//   return Padding(
-//     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-//     child: Container(
-//       width: MediaQuery.of(context).size.width,
-//       height: 110,
-//       decoration: BoxDecoration(
-//           color: Colors.white.withOpacity(0.15),
-//           borderRadius: BorderRadius.all(Radius.circular(20))),
-//       child: Padding(
-//         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-//         child: Row(
-//           children: [
-//             Icon(
-//               Icons.message_rounded,
-//               color: Colors.greenAccent,
-//               size: 36,
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.only(left: 20, top: 10),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Text(
-//                     name,
-//                     style: TextStyle(color: Colors.grey, fontSize: 18),
-//                   ),
-//                   Text(
-//                     message,
-//                     style: TextStyle(
-//                         color: Colors.white.withOpacity(0.8), fontSize: 20),
-//                   )
-//                 ],
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//     ),
-//   );
-// }
 }
