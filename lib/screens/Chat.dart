@@ -4,17 +4,7 @@ import 'package:delivery/jsons/cats.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class Chat extends StatefulWidget {
-  @override
-  State<Chat> createState() => _ChatState();
-}
-
-class _ChatState extends State<Chat> {
-  final int testing = 2;
-  Kitty? catFact;
-  Future<http.Response> uriParse =
-      http.get(Uri.parse('https://catfact.ninja/fact'));
-
+class Chat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
@@ -37,18 +27,17 @@ class _ChatState extends State<Chat> {
                   ),
                 ),
                 FutureBuilder(
-                  future: uriParse,
+                  future: http.get(Uri.parse('https://catfact.ninja/fact')),
                   builder: (BuildContext context,
                       AsyncSnapshot<http.Response> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.hasData) {
                       var parsedJson = json.decode(snapshot.data!.body);
-
-                      catFact = Kitty.fromJson(parsedJson);
 
                       return Padding(
                         padding: const EdgeInsets.only(top: 50),
                         child: Text(
-                          catFact!.fact.toString(),
+                          Kitty.fromJson(parsedJson).fact.toString(),
                           style: TextStyle(color: Colors.white, fontSize: 23),
                         ),
                       );
@@ -78,54 +67,45 @@ class _ChatState extends State<Chat> {
     );
   }
 
-  Widget _buildChat(String name, String message, BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 110,
-        decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.15),
-            borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-          child: Row(
-            children: [
-              Icon(
-                Icons.message_rounded,
-                color: Colors.greenAccent,
-                size: 36,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name,
-                      style: TextStyle(color: Colors.grey, fontSize: 18),
-                    ),
-                    Text(
-                      message,
-                      style: TextStyle(
-                          color: Colors.white.withOpacity(0.8), fontSize: 20),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  getDataFromAPI() async {
-    const String API_URL = "https://catfact.ninja/fact";
-    var response = await http.get(Uri.parse(API_URL));
-    var parsedJson = await json.decode(response.body);
-    setState(() {
-      catFact = Kitty.fromJson(parsedJson);
-    });
-  }
+// Widget _buildChat(String name, String message, BuildContext context) {
+//   return Padding(
+//     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+//     child: Container(
+//       width: MediaQuery.of(context).size.width,
+//       height: 110,
+//       decoration: BoxDecoration(
+//           color: Colors.white.withOpacity(0.15),
+//           borderRadius: BorderRadius.all(Radius.circular(20))),
+//       child: Padding(
+//         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+//         child: Row(
+//           children: [
+//             Icon(
+//               Icons.message_rounded,
+//               color: Colors.greenAccent,
+//               size: 36,
+//             ),
+//             Padding(
+//               padding: const EdgeInsets.only(left: 20, top: 10),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text(
+//                     name,
+//                     style: TextStyle(color: Colors.grey, fontSize: 18),
+//                   ),
+//                   Text(
+//                     message,
+//                     style: TextStyle(
+//                         color: Colors.white.withOpacity(0.8), fontSize: 20),
+//                   )
+//                 ],
+//               ),
+//             )
+//           ],
+//         ),
+//       ),
+//     ),
+//   );
+// }
 }
