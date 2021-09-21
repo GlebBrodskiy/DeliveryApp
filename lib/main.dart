@@ -1,6 +1,6 @@
+import 'package:delivery/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'screens/Main.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,19 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        Provider<Color>.value(value: Colors.yellow)
-      ],
+      providers: [Provider<Color>.value(value: Colors.white)],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-
         home: Navigating(),
         theme: ThemeData(
-          primarySwatch: Colors.green,
-          visualDensity: VisualDensity.adaptivePlatformDensity
-        ),
+            primarySwatch: Colors.green,
+            visualDensity: VisualDensity.adaptivePlatformDensity),
       ),
     );
   }
 }
-
