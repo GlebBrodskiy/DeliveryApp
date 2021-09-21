@@ -1,5 +1,5 @@
-// import 'package:delivery/screens/CatFactScreen.dart';
-// import 'package:delivery/screens/MainScreen.dart';
+// import 'package:delivery/screens/cat_fact_screen.dart';
+// import 'package:delivery/screens/main_screen.dart';
 // import 'package:test/test.dart';
 //
 // void main() {

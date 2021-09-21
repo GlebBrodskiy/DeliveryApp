@@ -1,4 +1,4 @@
-import 'package:delivery/screens/MainScreen.dart';
+import 'package:delivery/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
