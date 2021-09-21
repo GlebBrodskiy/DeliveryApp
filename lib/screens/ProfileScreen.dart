@@ -147,16 +147,16 @@ class _ProfileState extends State<Profile> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Constant(
-neededColor: Colors.yellow,
-            child: Builder(
-              builder: (context) {
-                return Text(
-                  profileName ?? 'Anam Wusono',
-                  style: TextStyle(
-                      color: Constant.of(context)?.neededColor, fontSize: 30, fontWeight: FontWeight.bold),
-                );
-              }
-            ),
+            neededColor: Colors.yellow,
+            child: Builder(builder: (context) {
+              return Text(
+                profileName ?? 'Anam Wusono',
+                style: TextStyle(
+                    color: Constant.of(context)?.neededColor,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              );
+            }),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 4),
@@ -266,22 +266,26 @@ neededColor: Colors.yellow,
         Padding(
           padding: const EdgeInsets.only(left: 20),
           child: ValueListenableBuilder(
-            builder: (BuildContext context, int value, Widget? child){
-             return Text(
+            builder: (BuildContext context, int value, Widget? child) {
+              return Text(
                 'You Have ${_counter.value} Voucher',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               );
             },
             valueListenable: _counter,
-
-
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 50.0),
-          child: TextButton(onPressed: (){
-            _counter.value++;
-          }, child: Text('Press me', style: TextStyle(color: Colors.white),),),
+          child: TextButton(
+            onPressed: () {
+              _counter.value++;
+            },
+            child: Text(
+              'Press me',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
         ),
       ],
     );

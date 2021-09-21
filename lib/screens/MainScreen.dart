@@ -1,8 +1,7 @@
-import 'package:delivery/screens/ProfileScreen.dart';
-import 'package:flutter/material.dart';
 import 'package:delivery/screens/CartScreen.dart';
 import 'package:delivery/screens/CatFactScreen.dart';
-
+import 'package:delivery/screens/ProfileScreen.dart';
+import 'package:flutter/material.dart';
 
 class Navigating extends StatefulWidget {
   const Navigating({Key? key}) : super(key: key);
@@ -26,7 +25,6 @@ class _NavigatingState extends State<Navigating> {
         backgroundColor: Colors.white.withOpacity(0.150),
         showUnselectedLabels: false,
         selectedItemColor: Color.fromRGBO(83, 232, 139, 1),
-        
         unselectedItemColor: Color.fromRGBO(8, 145, 88, 1.0),
         type: BottomNavigationBarType.fixed,
         currentIndex: this.selectedIndex,
@@ -48,7 +46,8 @@ class _NavigatingState extends State<Navigating> {
           this.onTapHandler(index);
         },
       ),
-    body: this.navigateNextPage(),);
+      body: this.navigateNextPage(),
+    );
   }
 
   void onTapHandler(int index) {
@@ -57,19 +56,18 @@ class _NavigatingState extends State<Navigating> {
     });
   }
 
- Widget navigateNextPage() {
+  Widget navigateNextPage() {
     if (this.selectedIndex == 0) {
       return this._myMain;
     } else if (this.selectedIndex == 1) {
-      return this._myProfile;}
-    else if (this.selectedIndex == 2) {
-      return this._myCart;}
-    else if (this.selectedIndex == 3) {
+      return this._myProfile;
+    } else if (this.selectedIndex == 2) {
+      return this._myCart;
+    } else if (this.selectedIndex == 3) {
       return this._myChat;
-    }else {
+    } else {
       return this._myMain;
     }
-
   }
 }
 
@@ -107,145 +105,128 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
-
-
-
   @override
   Widget build(BuildContext context) {
     print(foodMenu.length);
     return ListView(scrollDirection: Axis.vertical, children: [
-        Container(
-          child: Column(
-            children: [
-             _buildHeader(),
-              _buildSearchBar(),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                 _buildAdvertising(),
-                  _buildRestaurantsHeader(),
-                  _buildRestaurantList(),
-                  _buildPopularMenuHeader(),
-                  _buildPopularMenu(0),
-                  _buildPopularMenu(1),
-                  _buildPopularMenu(2),
-
-                ],
-              )
-            ],
-          ),
+      Container(
+        child: Column(
+          children: [
+            _buildHeader(),
+            _buildSearchBar(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _buildAdvertising(),
+                _buildRestaurantsHeader(),
+                _buildRestaurantList(),
+                _buildPopularMenuHeader(),
+                _buildPopularMenu(0),
+                _buildPopularMenu(1),
+                _buildPopularMenu(2),
+              ],
+            )
+          ],
         ),
-      ]);
-
+      ),
+    ]);
   }
-Widget _buildPopularMenu(int index){
-    return  Padding(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: SizedBox(
-            height: 100,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
-            child: Card(
-              color: Colors.white.withOpacity(0.150),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(20))),
-              child: Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Container(
-                        child:
-                        Image.asset(foodMenu[index]),
+
+  Widget _buildPopularMenu(int index) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: SizedBox(
+        height: 100,
+        width: MediaQuery.of(context).size.width,
+        child: Card(
+          color: Colors.white.withOpacity(0.150),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    child: Image.asset(foodMenu[index]),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${foodMenuTitle[index]}',
+                        style: TextStyle(color: Colors.white),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, top: 18),
-                      child: Column(
-                        crossAxisAlignment:
-                        CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${foodMenuTitle[index]}',
-                            style: TextStyle(
-                                color: Colors.white),
-                          ),
-                          Padding(
-                            padding:
-                            const EdgeInsets.only(
-                                top: 4),
-                            child: Text(
-                              '${foodMenuSubtitle[index]}',
-                              style: TextStyle(
-                                  color: Colors.grey),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.centerRight,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
                         child: Text(
-                          '\$ ${foodMenuPrice[index]}',
-                          style: TextStyle(
-                              color: Color.fromRGBO(
-                                  83, 232, 139, 1)),
+                          '${foodMenuSubtitle[index]}',
+                          style: TextStyle(color: Colors.grey),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      '\$ ${foodMenuPrice[index]}',
+                      style: TextStyle(color: Color.fromRGBO(83, 232, 139, 1)),
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
-        );
-
-}
-Widget _buildHeader(){
- return SafeArea(
-    child: Padding(
-      padding:
-      const EdgeInsets.only(top: 30.0, left: 25, right: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            '''Find Your 
-Favorite Food''',
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 35,
-                fontWeight: FontWeight.bold),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 14),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.150),
-                  borderRadius: BorderRadius.circular(20)),
-              child: IconButton(
-                iconSize: 45,
-                onPressed: () {},
-                icon: Icon(
-                  Icons.notifications_none,
-                  color: Colors.green,
-                ),
-                color: Colors.white70,
-              ),
-            ),
-          )
-        ],
+        ),
       ),
-    ),
-  );
-}
-Widget _buildSearchBar(){
+    );
+  }
+
+  Widget _buildHeader() {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 30.0, left: 25, right: 25),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              '''Find Your 
+Favorite Food''',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 14),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.150),
+                    borderRadius: BorderRadius.circular(20)),
+                child: IconButton(
+                  iconSize: 45,
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.notifications_none,
+                    color: Colors.green,
+                  ),
+                  color: Colors.white70,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSearchBar() {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
       child: Row(
@@ -253,14 +234,8 @@ Widget _buildSearchBar(){
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width * 0.750,
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.065,
+            width: MediaQuery.of(context).size.width * 0.750,
+            height: MediaQuery.of(context).size.height * 0.065,
             padding: EdgeInsets.only(left: 25),
             child: TextField(
               style: TextStyle(color: Colors.grey),
@@ -281,14 +256,8 @@ Widget _buildSearchBar(){
           Padding(
               padding: const EdgeInsets.only(right: 25.0),
               child: Container(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * 0.160,
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * 0.065,
+                width: MediaQuery.of(context).size.width * 0.160,
+                height: MediaQuery.of(context).size.height * 0.065,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: Colors.white.withOpacity(0.150)),
@@ -318,11 +287,11 @@ Widget _buildSearchBar(){
         ],
       ),
     );
-}
-Widget _buildAdvertising(){
-    return  Padding(
-      padding:
-      const EdgeInsets.only(left: 25, right: 25, top: 20),
+  }
+
+  Widget _buildAdvertising() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 25, right: 25, top: 20),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -340,16 +309,14 @@ Widget _buildAdvertising(){
             Positioned(
               child: Text(
                 'Special Deal For\n October',
-                style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               top: 20,
               left: 200,
             ),
             Positioned(
               child: ElevatedButton(
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.green),
+                style: TextButton.styleFrom(backgroundColor: Colors.green),
                 onPressed: () {},
                 child: Text(
                   'Buy Now',
@@ -364,33 +331,32 @@ Widget _buildAdvertising(){
         ),
       ),
     );
-}
-Widget _buildRestaurantsHeader(){
-  return Padding(
-    padding: const EdgeInsets.symmetric(
-        horizontal: 25, vertical: 25),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'Nearest Restaurant',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold),
-        ),
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            'View More',
-            style: TextStyle(color: Colors.orange[700]),
+  }
+
+  Widget _buildRestaurantsHeader() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Nearest Restaurant',
+            style: TextStyle(
+                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
           ),
-        )
-      ],
-    ),
-  );
-}
-Widget _buildRestaurantList(){
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              'View More',
+              style: TextStyle(color: Colors.orange[700]),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRestaurantList() {
     return Padding(
       padding: const EdgeInsets.only(left: 20),
       child: Container(
@@ -406,27 +372,22 @@ Widget _buildRestaurantList(){
                 padding: const EdgeInsets.only(right: 20),
                 child: Card(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(20))),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
                     color: Colors.white.withOpacity(0.150),
                     child: Center(
                       child: Column(
-                        mainAxisAlignment:
-                        MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
                               height: 100,
                               padding: EdgeInsets.zero,
                               constraints: BoxConstraints(),
-                              child: Image.asset(
-                                  restoImages[index])),
+                              child: Image.asset(restoImages[index])),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 4, top: 17),
+                            padding: const EdgeInsets.only(bottom: 4, top: 17),
                             child: Text(
                               nearestRestaurants[index],
-                              style:
-                              TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.white),
                             ),
                           ),
                           Padding(
@@ -435,8 +396,7 @@ Widget _buildRestaurantList(){
                             ),
                             child: Text(
                               '${howLongToGo[index]} mins',
-                              style:
-                              TextStyle(color: Colors.grey),
+                              style: TextStyle(color: Colors.grey),
                             ),
                           ),
                         ],
@@ -448,20 +408,18 @@ Widget _buildRestaurantList(){
         ),
       ),
     );
-}
-Widget _buildPopularMenuHeader(){
+  }
+
+  Widget _buildPopularMenuHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 25, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             'Popular Menu',
             style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
           ),
           TextButton(
             onPressed: () {},
@@ -473,25 +431,22 @@ Widget _buildPopularMenuHeader(){
         ],
       ),
     );
-}
+  }
 }
 
 class Constant extends InheritedWidget {
   final Color neededColor;
-  const Constant({
-    required this.neededColor,
-    required Widget child
-  }) : super(child: child);
 
-
+  const Constant({required this.neededColor, required Widget child})
+      : super(child: child);
 
   @override
   bool updateShouldNotify(Constant old) => neededColor != old.neededColor;
 
-  static Constant? of(BuildContext context){
-     final Constant? result = context.dependOnInheritedWidgetOfExactType<Constant>();
-     assert(result != null, 'No Constant found in context');
-     return result!;
+  static Constant? of(BuildContext context) {
+    final Constant? result =
+        context.dependOnInheritedWidgetOfExactType<Constant>();
+    assert(result != null, 'No Constant found in context');
+    return result!;
   }
-
 }

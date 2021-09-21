@@ -15,35 +15,29 @@ class Chat extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.9,
             child: ListView(
               shrinkWrap: false,
-              children: [
-               _buildHeader(),
-              _buildFactParse()
-              ],
+              children: [_buildHeader(), _buildFactParse()],
             ),
           )
         ],
       ),
     );
+  }
 
-    }
-  Widget _buildHeader(){
-    return  Padding(
+  Widget _buildHeader() {
+    return Padding(
       padding: const EdgeInsets.only(top: 70, left: 25),
       child: Text(
         'Cat Facts',
         style: TextStyle(
-            color: Colors.white,
-            fontSize: 31,
-            fontWeight: FontWeight.bold),
+            color: Colors.white, fontSize: 31, fontWeight: FontWeight.bold),
       ),
     );
   }
 
-  Widget _buildFactParse(){
-    return   FutureBuilder(
+  Widget _buildFactParse() {
+    return FutureBuilder(
       future: http.get(Uri.parse('https://catfact.ninja/fact')),
-      builder: (BuildContext context,
-          AsyncSnapshot<http.Response> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
           var parsedJson = json.decode(snapshot.data!.body);
@@ -55,8 +49,7 @@ class Chat extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 23),
             ),
           );
-        } else if (snapshot.connectionState ==
-            ConnectionState.waiting) {
+        } else if (snapshot.connectionState == ConnectionState.waiting) {
           return SizedBox(
             child: Center(child: CircularProgressIndicator()),
             width: 100,
