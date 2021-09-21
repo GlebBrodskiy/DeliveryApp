@@ -1,7 +1,7 @@
 import 'package:delivery/screens/ProfileScreen.dart';
 import 'package:flutter/material.dart';
-import 'CartScreen.dart';
-import 'CatFactScreen.dart';
+import 'package:delivery/screens/CartScreen.dart';
+import 'package:delivery/screens/CatFactScreen.dart';
 
 
 class Navigating extends StatefulWidget {

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 class Kitty {
   String? fact;
   int? length;
