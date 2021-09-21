@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [Provider<Color>.value(value: Colors.yellow)],
+      providers: [Provider<Color>.value(value: Colors.white)],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Navigating(),

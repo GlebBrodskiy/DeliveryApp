@@ -12,9 +12,9 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final List<String> foodMenu = [
-    'lib/screens/assets/food1.png',
-    'lib/screens/assets/food2.png',
-    'lib/screens/assets/food3.png',
+    'assets/images/food_1.png',
+    'assets/images/food_2.png',
+    'assets/images/food3.png',
   ];
   final List<String> foodMenuTitle = [
     'Spacy crab soup',
@@ -115,7 +115,7 @@ class _ProfileState extends State<Profile> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.4,
       child: Image.asset(
-        'lib/screens/assets/Profile.png',
+        'lib/screens/assets/profile.png',
         fit: BoxFit.fill,
       ),
     );
@@ -147,7 +147,7 @@ class _ProfileState extends State<Profile> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Constant(
-            neededColor: Colors.yellow,
+            neededColor: Colors.white,
             child: Builder(builder: (context) {
               return Text(
                 profileName ?? 'Anam Wusono',
@@ -246,7 +246,7 @@ class _ProfileState extends State<Profile> {
                 height: 48,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 5),
-                  child: Image.asset('lib/screens/assets/Pencil.png'),
+                  child: Image.asset('lib/screens/assets/pencil.png'),
                 ),
               ),
             ),

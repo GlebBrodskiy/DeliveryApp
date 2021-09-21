@@ -9,9 +9,9 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   List<String> foodMenu = [
-    'lib/screens/assets/food1.png',
-    'lib/screens/assets/food2.png',
-    'lib/screens/assets/food3.png',
+    'assets/images/food_1.png',
+    'assets/images/food_2.png',
+    'assets/images/food3.png',
   ];
   List<String> foodMenuTitle = [
     'Spacy crab soup',

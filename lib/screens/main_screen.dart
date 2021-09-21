@@ -79,15 +79,15 @@ List<String> nearestRestaurants = [
 ];
 List<int> howLongToGo = [12, 20, 8, 4];
 List<String> restoImages = [
-  'lib/screens/assets/1.png',
-  'lib/screens/assets/RestaurantImage2.png',
-  'lib/screens/assets/RestaurantImage3.png',
-  'lib/screens/assets/4.png'
+  'assets/images/1.png',
+  'assets/images/restaurant_image_2.png',
+  'assets/images/restaurant_image_3.png',
+  'assets/images/4.png'
 ];
 List<String> foodMenu = [
-  'lib/screens/assets/food1.png',
-  'lib/screens/assets/food2.png',
-  'lib/screens/assets/food3.png',
+  'assets/images/food_1.png',
+  'assets/images/food_2.png',
+  'assets/images/food3.png',
 ];
 List<String> foodMenuTitle = [
   'Spacy crab soup',
@@ -301,7 +301,7 @@ Favorite Food''',
         child: Stack(
           children: [
             Image.asset(
-              'lib/screens/assets/Image.jpg',
+              'lib/screens/assets/image.jpg',
               fit: BoxFit.cover,
               width: 400,
               height: 150,
