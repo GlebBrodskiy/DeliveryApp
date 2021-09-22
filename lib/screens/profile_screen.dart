@@ -35,31 +35,35 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.150),
-      body: Column(
-        children: [
-          Expanded(
-            child: Stack(children: [
-              _buildProfileImage(),
-              SlidingSheet(
-                color: Colors.black,
-                backdropColor: Colors.transparent,
-                elevation: 8,
-                cornerRadius: 40,
-                snapSpec: const SnapSpec(
-                  snap: true,
-                  snappings: [0.6, 0.9],
-                  // positioning: SnapPositioning.relativeToAvailableSpace,
-                ),
-                builder: (context, state) {
-                  return _buildProfileInfo();
-                },
-              )
-            ]),
-          ),
-        ],
-      ),
+    return Navigator(
+        onGenerateRoute: (routeSettings) {
+              return MaterialPageRoute<void>(
+                builder: (context) => Scaffold(
+        backgroundColor: Colors.white.withOpacity(0.150),
+        body: Column(
+          children: [
+            Expanded(
+              child: Stack(children: [
+                _buildProfileImage(),
+                SlidingSheet(
+                  color: Colors.black,
+                  backdropColor: Colors.transparent,
+                  elevation: 8,
+                  cornerRadius: 40,
+                  snapSpec: const SnapSpec(
+                    snap: true,
+                    snappings: [0.6, 0.9],
+                    // positioning: SnapPositioning.relativeToAvailableSpace,
+                  ),
+                  builder: (context, state) {
+                    return _buildProfileInfo();
+                  },
+                )
+              ]),
+            ),
+          ],
+        ),
+      ),);}
     );
   }
 

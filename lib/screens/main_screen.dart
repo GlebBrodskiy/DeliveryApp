@@ -43,28 +43,37 @@ class _NavigatingState extends State<Navigating> {
               icon: Icon(Icons.message_rounded), label: 'Chat'),
         ],
         onTap: (int index) {
-          this.onTapHandler(index);
+          onTapHandler(index);
         },
       ),
-      body: this.navigateNextPage(),
+      body: navigateNextPage(),
     );
   }
 
   void onTapHandler(int index) {
-    this.setState(() {
-      this.selectedIndex = index;
-    });
+    if (index != 1) {
+      this.setState(() {
+        selectedIndex = index;
+      });
+    } else {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Profile()));
+    }
   }
 
   Widget navigateNextPage() {
     if (this.selectedIndex == 0) {
-      return this._myMain;
+      return _myMain;
+
+
+
     } else if (this.selectedIndex == 1) {
-      return this._myProfile;
+
+      return _myProfile;
     } else if (this.selectedIndex == 2) {
-      return this._myCart;
+      return _myCart;
     } else if (this.selectedIndex == 3) {
-      return this._myChat;
+      return _myChat;
     } else {
       return this._myMain;
     }
@@ -108,28 +117,33 @@ class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     print(foodMenu.length);
-    return ListView(scrollDirection: Axis.vertical, children: [
-      Container(
-        child: Column(
-          children: [
-            _buildHeader(),
-            _buildSearchBar(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+    return Navigator(onGenerateRoute: (routeSettings) {
+      return MaterialPageRoute<void>(
+        builder: (context) =>
+            ListView(scrollDirection: Axis.vertical, children: [
+          Container(
+            child: Column(
               children: [
-                _buildAdvertising(),
-                _buildRestaurantsHeader(),
-                _buildRestaurantList(),
-                _buildPopularMenuHeader(),
-                _buildPopularMenu(0),
-                _buildPopularMenu(1),
-                _buildPopularMenu(2),
+                _buildHeader(),
+                _buildSearchBar(),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    _buildAdvertising(),
+                    _buildRestaurantsHeader(),
+                    _buildRestaurantList(),
+                    _buildPopularMenuHeader(),
+                    _buildPopularMenu(0),
+                    _buildPopularMenu(1),
+                    _buildPopularMenu(2),
+                  ],
+                )
               ],
-            )
-          ],
-        ),
-      ),
-    ]);
+            ),
+          ),
+        ]),
+      );
+    });
   }
 
   Widget _buildPopularMenu(int index) {

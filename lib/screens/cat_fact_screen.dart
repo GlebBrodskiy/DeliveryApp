@@ -7,20 +7,28 @@ import 'package:http/http.dart' as http;
 class Chat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      child: Column(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.9,
-            child: ListView(
-              shrinkWrap: false,
-              children: [_buildHeader(), _buildFactParse()],
-            ),
-          )
-        ],
-      ),
-    );
+    return Navigator(onGenerateRoute: (routeSettings) {
+      return MaterialPageRoute<void>(
+        builder: (context) => FittedBox(
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.9,
+                child: ListView(
+                  shrinkWrap: false,
+                  children: [
+                    _buildHeader(),
+                    _buildFactParse(),
+                    _buildSayKittyButton(context)
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    });
   }
 
   Widget _buildHeader() {
@@ -67,4 +75,35 @@ class Chat extends StatelessWidget {
       },
     );
   }
+
+  Widget _buildSayKittyButton(context) {
+    return TextButton(
+        onPressed: () {
+          _push(context);
+        },
+        child: Text('Press on me', style: TextStyle(fontSize: 30),));
+  }
+
+  void _push(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => sayKitty(),
+      ),
+    );
+  }
+}
+
+Widget sayKitty() {
+  return Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "KITTY!!!",
+          style: TextStyle(color: Colors.white, fontSize: 50),
+        ),
+      ],
+    ),
+  );
 }

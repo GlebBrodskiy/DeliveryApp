@@ -25,14 +25,18 @@ class _CartState extends State<Cart> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [_buildHeader(), _buildOrder(), _buildTotalMoney()],
+    return Navigator(
+        onGenerateRoute: (routeSettings) {
+              return MaterialPageRoute<void>(
+                builder: (context) =>Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [_buildHeader(), _buildOrder(), _buildTotalMoney()],
+        ),
       ),
-    );
+    );});
   }
 
   Widget _buildHeader() {
